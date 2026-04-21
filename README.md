@@ -484,11 +484,11 @@ local function createPageTitle(text, y, posicao)
 end
 
 --- Rodapé das Tabs
-local function createFooter(y1, posicao)
+local function createFooter(y1, y2, posicao)
     local UnderLineRodape = Instance.new("Frame", posicao)
     UnderLineRodape.Name = "UnderLineRodape"
     UnderLineRodape.Size = UDim2.new(1, 0, 0, 5.99)
-    UnderLineRodape.Position = UDim2.new(0 , 0, 0, y1)
+    UnderLineRodape.Position = UDim2.new(0 , 0, y1, 0)
     UnderLineRodape.BackgroundTransparency = 0
     UnderLineRodape.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
     UnderLineRodape.BorderSizePixel = 0
@@ -514,13 +514,13 @@ local function createFooter(y1, posicao)
 
     local LogoRodape = Instance.new("ImageLabel", posicao)
     LogoRodape.Size = UDim2.new(0, 35, 0, 35)
-    LogoRodape.Position = UDim2.new(0.08,0, 0, y1 + 4)
+    LogoRodape.Position = UDim2.new(0.08,0,  y1 + y2, 0)
     LogoRodape.BackgroundTransparency = 1
     LogoRodape.Image = "rbxassetid://129327299482883"
 
     local TextRodape = Instance.new("TextLabel", posicao)
     TextRodape.Size = UDim2.new(0, 100, 0, 20)
-    TextRodape.Position = UDim2.new(0.4, 0, 0, y1 + 10)
+    TextRodape.Position = UDim2.new(0.4, 0, y1 + y2 * 2,5, 0)
     TextRodape.BackgroundTransparency = 1
     TextRodape.TextColor3 = Color3.fromRGB(255, 255, 255)
     TextRodape.Text = "Drakion Hub  -  BY  龙'¨'珠- The Black -龙'¨'珠"
@@ -1033,7 +1033,7 @@ adjustTextSize(openDiscordBtn, 20)
     end)
 
 ----Rodapé
-local RodapeDiscord = createFooter(223.02, ScrollDiscord)
+local RodapeDiscord = createFooter(0.84, 0.015, ScrollDiscord)
 
 -- register page
 pages["Discord"] = ScrollDiscord
@@ -1237,7 +1237,7 @@ local MethodStatus = Selectbutton(ScrollFarm, "Method Status...", 0.15, 0.765, {
 local AutoStatusBtn = createButton("Auto Status", 0.815, ScrollFarm)
 
 ----Rodapé
-local Rodapemainfarm = createFooter(960, ScrollFarm)
+local Rodapemainfarm = createFooter(0.96, 0.004, ScrollFarm)
 
 -- register page and setup click to show it
 pages["Main Farm"] = ScrollFarm
@@ -1281,7 +1281,7 @@ local RainbowColors = createButton("Rainbow Colors", 0.788, ScrollItensQuest)
 local AutoBuyHaki = createButton("Auto Buy Haki", 0.852, ScrollItensQuest)
 
 ----Rodapé
-local RodapeItensQuest = createFooter(660, ScrollItensQuest)
+local RodapeItensQuest = createFooter(0.942, 0.00571, ScrollItensQuest)
 
 -- register page
 pages["ItensQuest"] = ScrollItensQuest
@@ -1338,7 +1338,7 @@ local SelectBoss = Selectbutton(ScrollFarmOuther, "Select Boss...", 0.13, 0.779,
 local AtackBossselected = createButton("Atack Boss selected", 0.824, ScrollFarmOuther)
 
 ---Rodapé Farm Outher
-local RodapeFarmOuther = createFooter(1056, ScrollFarmOuther)
+local RodapeFarmOuther = createFooter(0.96, 0.003636, ScrollFarmOuther)
 
 -- register page
 pages["FarmOuther"] = ScrollFarmOuther
