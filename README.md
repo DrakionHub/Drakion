@@ -9,6 +9,17 @@ local function isPress(input)
         or input.UserInputType == Enum.UserInputType.Touch
 end
 
+---- função para proporcionar a Gui de acordo com o dispositivo do usuário
+local function adjustGuiSize(variave, Tmh, T)
+    if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled then
+    -- Mobile
+    variave.Size = UDim2.new(0, Tmh/4 * 3, 0, T/4 * 3)
+    else
+    -- Pc
+        variave.Size = UDim2.new(0, Tmh, 0, T)
+   end
+end
+
 -- GUI PRINCIPAL
 local gui = Instance.new("ScreenGui")
 gui.Name = "DrakionHub"
@@ -17,7 +28,7 @@ gui.Parent = player:WaitForChild("PlayerGui")
 
 local mainFrame = Instance.new("Frame", gui)
 mainFrame.Name = "MainFrame"
-mainFrame.Size = UDim2.new(0, 600, 0, 350)
+adjustGuiSize(mainFrame, 600, 350) -- tamanho base para PC, será ajustado para mobile
 mainFrame.AnchorPoint = Vector2.new(0.5, 0.5)
 mainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
 -- começa escondido; será mostrado pelo botão de toggle
@@ -62,13 +73,38 @@ do
        end
     end)
 end
+
+---- função para proporcionar o textSize de acordo com o dispositivo do usuário
+local UserInputService = game:GetService("UserInputService")
+
+local function adjustTextSize(variavel, Tm)
+    if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled then
+    -- Mobile
+    variavel.TextSize = Tm/4 * 3
+    else
+    -- Pc
+        variavel.TextSize = Tm
+    end 
+end
+
+local function adjustSize(variavel, Tm, Y)
+    if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled then
+    -- Mobile
+    variavel.Size = UDim2.new(Tm/7 , 0, 0.35, 0)
+    variavel.Position = UDim2.new(Y/1.05, 0, 0.33, 0)
+    else
+    -- Pc
+    variavel.Size = UDim2.new(Tm/9, 0, 0.35, 0)
+    variavel.Position = UDim2.new(Y, 0, 0.33, 0)
+    end
+end
 -- =========================
 -- SIDEBAR ESQUERDO
 -- =========================
 local sidebar = Instance.new("Frame", mainFrame)
 sidebar.Name = "Sidebar"
-sidebar.Size = UDim2.new(0, 185, 0, 296.5)
-sidebar.Position = UDim2.new(0, 0, 0, 54)
+sidebar.Size = UDim2.new(0.308, 0, 0.842, 0)
+sidebar.Position = UDim2.new(0, 0, 0.157, 0)
 sidebar.BackgroundColor3 = Color3.fromRGB(3,0,75)
 sidebar.BorderSizePixel = 0
 sidebar.BackgroundTransparency = 1
@@ -84,31 +120,30 @@ local headerFrame = Instance.new("Frame", mainFrame)
 headerFrame.Name = "HeaderFrame"
 headerFrame.Size = UDim2.new(1, 0, 0, 50)
 headerFrame.Position = UDim2.new(0, 0, 0, 0)
-headerFrame.BackgroundColor3 = Color3.fromRGB(3,0, 75)
 headerFrame.BackgroundTransparency = 1
 headerFrame.BorderSizePixel = 0
 
 -- Logo
-local logo = Instance.new("ImageLabel", headerFrame)
+local logo = Instance.new("ImageLabel", mainFrame)
 logo.Name = "Logo"
-logo.Size = UDim2.new(0, 100, 0, 100)
-logo.Position = UDim2.new(0, 0, 0, -30)
+logo.Size = UDim2.new(0.1666, 0, 0.2857, 0)
+logo.Position = UDim2.new(0, 0, -0.086, 0)
 logo.BackgroundTransparency = 1
 logo.Image = "rbxassetid://129327299482883" -- troque pelo ID do seu arquivo
 logo.ScaleType = Enum.ScaleType.Fit
 logo.ZIndex = 3
 
 -- Título ao lado da logo
-local sidebarHeader = Instance.new("TextLabel", headerFrame)
+local sidebarHeader = Instance.new("TextLabel", mainFrame)
 sidebarHeader.Name = "SidebarHeader"
-sidebarHeader.Size = UDim2.new(1, -72, 0, 64)
-sidebarHeader.Position = UDim2.new(0, 140, 0, -6)
+sidebarHeader.Size = UDim2.new(0.88, 0, 0.183, 0)
+sidebarHeader.Position = UDim2.new(0.23333, 0, -0.0171, 0)
 sidebarHeader.BackgroundTransparency = 1
 sidebarHeader.TextColor3 = Color3.fromRGB(255,255,255)
 sidebarHeader.TextScaled = false
 sidebarHeader.Text = "Drakion Hub"
 sidebarHeader.BorderSizePixel = 0
-sidebarHeader.TextSize = 35
+adjustTextSize(sidebarHeader, 35)
 sidebarHeader.TextXAlignment = Enum.TextXAlignment.Left
 sidebarHeader.TextYAlignment = Enum.TextYAlignment.Center
 sidebarHeader.FontFace = Font.new(
@@ -145,10 +180,10 @@ local menuItems = {
     "Setting",
 }
 
-local scrollFrame = Instance.new("ScrollingFrame", sidebar)
+local scrollFrame = Instance.new("ScrollingFrame", mainFrame)
 scrollFrame.Name = "MenuScroll"
-scrollFrame.Size = UDim2.new(1, 0, 1, -15)
-scrollFrame.Position = UDim2.new(0, 0, 0, 10)
+scrollFrame.Size = UDim2.new(0.308, 0, 0.806, 0)
+scrollFrame.Position = UDim2.new(0, 0, 0.183, 0)
 scrollFrame.BackgroundTransparency = 1
 scrollFrame.BorderSizePixel = 0
 scrollFrame.ScrollBarThickness = 6
@@ -158,8 +193,8 @@ Instance.new("UICorner", scrollFrame).CornerRadius = UDim.new(0, 5)
 --sinalizador de menu selecionado
 local selectedIndicator = Instance.new("Frame", scrollFrame)
 selectedIndicator.Name = "Indicator"
-selectedIndicator.Size = UDim2.new(0, 5, 0, 25)
-selectedIndicator.Position = UDim2.new(0,10,0.15, 0) -- posição inicial, será movida para o botão selecionado
+selectedIndicator.Size = UDim2.new(0.027, 0, 0.0596, 0)
+selectedIndicator.Position = UDim2.new(0.0541, 0, 0.15, 0) -- posição inicial, será movida para o botão selecionado
 selectedIndicator.BackgroundColor3 = Color3.fromRGB(255,255,255)
 selectedIndicator.BorderSizePixel = 0
 selectedIndicator.Visible = false -- começa invisível, só mostra quando um menu é selecionado
@@ -170,18 +205,17 @@ selectedIndicator.ZIndex = 3
 for i, itemName in ipairs(menuItems) do
     local menuButton = Instance.new("TextButton", scrollFrame)
     menuButton.Name = itemName
-    menuButton.Size = UDim2.new(0.9, 0, 0, 35)
-    menuButton.Position = UDim2.new(0.05, 0, 0, (i - 1) * 40)
+    menuButton.Size = UDim2.new(0.9, 0, 0.1, 0)
+    menuButton.Position = UDim2.new(0.05, 0,  (i - 1) * 0.11, 0)
     menuButton.BackgroundColor3 = Color3.fromRGB(212,12,12)
 	menuButton.BackgroundTransparency = 0.3
     menuButton.TextColor3 =
     Color3.fromRGB(255,255,255)
-    menuButton.TextScaled = true
     menuButton.Text = itemName
     menuButton.BorderSizePixel = 0
     Instance.new("UICorner", menuButton).CornerRadius = UDim.new(0, 4)
     menuButton.TextScaled = false
-    menuButton.TextSize = 20
+    adjustTextSize(menuButton, 20)
     menuButton.Localize = false
     menuButton.ZIndex = 2
     menuButton.FontFace = Font.new(
@@ -206,7 +240,7 @@ grad.Color = ColorSequence.new{
 
     -- escurece ligeiramente ao passar o mouse
     menuButton.MouseEnter:Connect(function()
-        menuButton.BackgroundTransparency = 0.7
+        menuButton.BackgroundTransparency = 0.6
     end)
     menuButton.MouseLeave:Connect(function()
         menuButton.BackgroundTransparency = 0.3
@@ -214,7 +248,7 @@ grad.Color = ColorSequence.new{
 
     -- move indicator when button is clicked
     menuButton.MouseButton1Click:Connect(function()
-        selectedIndicator.Position = UDim2.new(0, 10, 0.015, (i - 1) * 40)
+        selectedIndicator.Position = UDim2.new(0.0541, 0, 0.015 + (i - 1) * 0.111, 0)
         selectedIndicator.Visible = true
     end)
 end
@@ -232,8 +266,8 @@ grad.Color = ColorSequence.new{
 
 	grad.Rotation = 90
 
--- start indicator on Credits menu (first item)
-selectedIndicator.Position = UDim2.new(0, 10, 0.015, 0)
+-- start indicator on Discord menu (first item)
+selectedIndicator.Position = UDim2.new(0.0541, 0, 0.015, 0)
 selectedIndicator.Visible = true
  
 -- =========================
@@ -241,8 +275,8 @@ selectedIndicator.Visible = true
 -- =========================
 local contentArea = Instance.new("Frame", mainFrame)
 contentArea.Name = "ContentArea"
-contentArea.Size = UDim2.new(1, -190, 1, -55)
-contentArea.Position = UDim2.new(0, 190, 0, 55)
+contentArea.Size = UDim2.new(0.6833, 0, 0.8428, 0)
+contentArea.Position = UDim2.new(0.3166, 0, 0.1571, 0)
 contentArea.BackgroundColor3 = Color3.fromRGB(3,0, 75)
 contentArea.BorderSizePixel = 0
 contentArea.BackgroundTransparency = 1
@@ -256,15 +290,15 @@ stroke2.Transparency = 0
 -- Header da página
 local pageHeader = Instance.new("TextLabel", contentArea)
 pageHeader.Name = "PageHeader"
-pageHeader.Size = UDim2.new(1,-50, 0, 50)
-pageHeader.Position = UDim2.new(0,70,0,-53)
+pageHeader.Size = UDim2.new(0.878, 0, 0.1694, 0)
+pageHeader.Position = UDim2.new(0.1707, 0, -0.1796, 0)
 pageHeader.TextColor3 = Color3.fromRGB(255, 255, 255)
 pageHeader.BackgroundColor3 = Color3.fromRGB(3,0, 75)
 pageHeader.BackgroundTransparency = 1
 pageHeader.Text = " discord.gg/Nfh5Sczyqz"
 pageHeader.BorderSizePixel = 0
 pageHeader.TextScaled = false
-pageHeader.TextSize = 15
+adjustTextSize(pageHeader, 15)
 pageHeader.Font = Enum.Font.LuckiestGuy
 pageHeader.TextXAlignment = Enum.TextXAlignment.Center
 pageHeader.TextYAlignment = Enum.TextYAlignment.Center
@@ -289,8 +323,8 @@ stroke.Thickness = 2
  -- white underline below PageHeader
 local headerUnderline = Instance.new("Frame", pageHeader)
 headerUnderline.Name = "HeaderUnderline"
-headerUnderline.Size = UDim2.new(1.68, 0, 0, 4)
-headerUnderline.Position = UDim2.new(0, -263, 0, 48.8) -- right under headerFrame height
+headerUnderline.Size = UDim2.new(1.68, 0, 0.08, 0)
+headerUnderline.Position = UDim2.new(-0.729, 0, 0.9765, 0) -- right under headerFrame height
 headerUnderline.BackgroundColor3 = Color3.fromRGB(0,0,0)
 headerUnderline.BorderSizePixel = 0
 headerUnderline.ZIndex = 2
@@ -298,8 +332,8 @@ headerUnderline.ZIndex = 2
 -- Botão X (Fechar)
 local closeBtn = Instance.new("TextButton", pageHeader)
 closeBtn.Name = "CloseButton"
-closeBtn.Size = UDim2.new(0, 30, 0, 30)
-closeBtn.Position = UDim2.new(1, -65, 0, 5)
+closeBtn.Size = UDim2.new(0.0833, 0, 0.6003, 0)
+closeBtn.Position = UDim2.new(0.8194, 0, 0.15, 0)
 closeBtn.BackgroundColor3 = Color3.fromRGB(212,12,12)
 closeBtn.TextColor3 = Color3.fromRGB(255,255,255)
 closeBtn.TextScaled = true
@@ -321,7 +355,7 @@ end)
 local toggleBtn = Instance.new("ImageButton", gui)
 toggleBtn.Name = "ToggleButton"
 toggleBtn.Size = UDim2.new(0,115,0,110.5)
-toggleBtn.Position = UDim2.new(0,7,0,620)
+toggleBtn.Position = UDim2.new(0,7,0.85,0)
 toggleBtn.Image = "rbxassetid://129327299482883" -- troque pelo ID do seu arquivo (pode ser o mesmo da logo)
 toggleBtn.BackgroundTransparency = 1
 toggleBtn.BorderSizePixel = 0
@@ -404,7 +438,7 @@ local function createPageTitle(text, y, posicao)
     )
     TituloEntreAsFuncoes.Localize = false
     TituloEntreAsFuncoes.ZIndex = 2
-    TituloEntreAsFuncoes.TextSize = 20
+    adjustTextSize(TituloEntreAsFuncoes, 20)
 
     local stroke3 = Instance.new("UIStroke", TituloEntreAsFuncoes)
     stroke3.Thickness = 2
@@ -500,7 +534,7 @@ local function createFooter(y1, posicao)
     )
     TextRodape.Localize = false
     TextRodape.ZIndex = 2
-    TextRodape.TextSize = 20
+    adjustTextSize(TextRodape, 20)
 
      local grad = Instance.new("UIGradient", TextRodape)
      grad.Color = ColorSequence.new{
@@ -541,7 +575,7 @@ local function createButton(text, y, posicao)
     BotaoprincipalText.TextYAlignment = Enum.TextYAlignment.Center
     BotaoprincipalText.Localize = false
     BotaoprincipalText.ZIndex = 2
-    BotaoprincipalText.TextSize = 18
+    adjustTextSize(BotaoprincipalText, 18)
 
     local grad = Instance.new("UIGradient", BotaoprincipalText)
     grad.Color = ColorSequence.new{
@@ -558,8 +592,7 @@ local function createButton(text, y, posicao)
     ----botão do button
     local ButtonOfTheBotao = Instance.new("ImageButton", Botaoprincipal)
     ButtonOfTheBotao.Name = text.."Button"
-    ButtonOfTheBotao.Size = UDim2.new(0.04, 0, 0.35, 0)
-    ButtonOfTheBotao.Position = UDim2.new(0.9, 0, 0.33, 0)
+    adjustSize(ButtonOfTheBotao, 0.4, 0.9)
     ButtonOfTheBotao.BackgroundTransparency = 0
     ButtonOfTheBotao.BackgroundColor3 = Color3.fromRGB(212,12,12)
     ButtonOfTheBotao.ImageTransparency = 1
@@ -662,7 +695,7 @@ local function Selectbutton(posicao, textLabel, yoptions, yposition, options)
     )
     selectedLabel.Localize = false
     selectedLabel.ZIndex = 2
-    selectedLabel.TextSize = 18
+    adjustTextSize(selectedLabel, 18)
 
     local grad = Instance.new("UIGradient", selectedLabel)
     grad.Color = ColorSequence.new{
@@ -706,7 +739,7 @@ local function Selectbutton(posicao, textLabel, yoptions, yposition, options)
     searchBox.Text = ""
     searchBox.ClearTextOnFocus = false
     searchBox.Font = Enum.Font.SourceSans
-    searchBox.TextSize = 16
+    adjustTextSize(searchBox, 16)
     searchBox.TextXAlignment = Enum.TextXAlignment.Left
     searchBox.TextYAlignment = Enum.TextYAlignment.Center
     local searchPadding = Instance.new("UIPadding", searchBox)
@@ -813,7 +846,7 @@ local function Selectbutton(posicao, textLabel, yoptions, yposition, options)
             Enum.FontWeight.ExtraBold,
             Enum.FontStyle.Normal
         )
-        optionBtn.TextSize = 18
+        adjustTextSize(optionBtn, 18)
         optionBtn.Text = name
         optionBtn.Localize = false
         optionBtn.Name = "Option"..i
@@ -888,7 +921,7 @@ local discordTitle = createPageTitle("Discord", 0, ScrollDiscord)
 ---menu discord
 local link = Instance.new("Frame", ScrollDiscord)
 link.Name = "Link"
-link.Size = UDim2.new(0, 330, 0, 162)
+link.Size = UDim2.new(0.894, 0, 0.61, 0)
 link.Position = UDim2.new(0.05, 0, 0.2, 0)
 link.BackgroundTransparency = 0
 link.BackgroundColor3 = Color3.fromRGB(0,0,0)
@@ -899,7 +932,7 @@ link.ZIndex = 2
 
 local discordLink = Instance.new("TextButton", link)
 discordLink.Name = "DiscordLink"
-discordLink.Size = UDim2.new(0, 270, 0, 30)
+discordLink.Size = UDim2.new(0.8184, 0, 0.185, 0)
 discordLink.BackgroundTransparency = 1
 discordLink.TextColor3 = Color3.fromRGB(212, 12, 12)
 discordLink.Text = "https://discord.gg/Nfh5Sczyqz"
@@ -914,13 +947,13 @@ discordLink.FontFace = Font.new(
 )
 discordLink.Localize = false
 discordLink.ZIndex = 3
-discordLink.TextSize = 20
+adjustTextSize(discordLink, 20)
 
 -----imagem do servidor
 local imagelink = Instance.new("ImageButton", link)
 imagelink.Name = "ToggleButton"
-imagelink.Size = UDim2.new(0,75,0,75)
-imagelink.Position = UDim2.new(0,10,0,30)
+imagelink.Size = UDim2.new(0.2273, 0, 0.463, 0 )
+imagelink.Position = UDim2.new(0.0303, 0, 0.1852, 0)
 imagelink.Image = "rbxassetid://129327299482883" -- troque pelo ID do seu arquivo (pode ser o mesmo da logo)
 imagelink.BackgroundTransparency = 1
 imagelink.BorderSizePixel = 0
@@ -930,8 +963,8 @@ imagelink.ZIndex = 3
 ---nome do servidor
 local serverName = Instance.new("TextLabel", link)
 serverName.Name = "ServerName"
-serverName.Size = UDim2.new(0, 270, 0, 30)
-serverName.Position = UDim2.new(0,70,0,53)
+serverName.Size = UDim2.new(0.818, 0, 0.1852, 0)
+serverName.Position = UDim2.new(0.212, 0, 0.327, 0)
 serverName.BackgroundTransparency = 1
 serverName.TextColor3 = Color3.fromRGB(255, 255, 255)
 serverName.Text = "Drakion hub ┃ community"
@@ -946,7 +979,7 @@ serverName.FontFace = Font.new(
 )
 serverName.Localize = false
 serverName.ZIndex = 3
-serverName.TextSize = 20
+adjustTextSize(serverName, 20)
 
 local stroke3 = Instance.new("UIStroke", serverName)
 stroke3.Thickness = 3
@@ -965,8 +998,8 @@ grad.Color = ColorSequence.new{
 --- botão de abrir o discord
 local openDiscordBtn = Instance.new("TextButton", link)
 openDiscordBtn.Name = "OpenDiscord"
-openDiscordBtn.Size = UDim2.new(0, 290, 0, 37)
-openDiscordBtn.Position = UDim2.new(0, 20, 0, 110)
+openDiscordBtn.Size = UDim2.new(0.879, 0, 0.228, 0)
+openDiscordBtn.Position = UDim2.new(0.0606, 0, 0.6792, 0)
 openDiscordBtn.BackgroundTransparency = 0
 openDiscordBtn.BackgroundColor3 = Color3.fromRGB(212,12,12)
 openDiscordBtn.BorderSizePixel = 0
@@ -980,7 +1013,7 @@ openDiscordBtn.FontFace = Font.new(
     Enum.FontWeight.ExtraBold,
     Enum.FontStyle.Normal
 )
-openDiscordBtn.TextSize = 20
+adjustTextSize(openDiscordBtn, 20)
 
     openDiscordBtn.MouseButton1Click:Connect(function()
        if setclipboard then
@@ -1013,7 +1046,7 @@ if discordBtn then
           Enum.FontWeight.ExtraBold,
           Enum.FontStyle.Normal
           )
-        pageHeader.TextSize = 20
+        adjustTextSize(pageHeader, 20)
         pageHeader.Localize = false
     end)
 end
@@ -1054,9 +1087,23 @@ local MethodMaestria = Selectbutton(ScrollFarm, "Method Maestria...", 0.09, 0.5,
 
 ----Rolagem de porcentagem de vida para Farm maestria
 
+local adjustScrolling = function(variavel, variavel2)
+    if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled then
+    ---- mobile
+    variavel2.Size = UDim2.new(0.0318/3 * 4, 0, 1, 0)
+    variavel.Size = UDim2.new(0.85, 0, 0.01, 0)
+    variavel.Position = UDim2.new(0, 27.5/4 * 3, 0.61, 0)
+    else
+    ---- pc
+    variavel2.Size = UDim2.new(0.0318, 0, 1, 0)
+    variavel.Size = UDim2.new(0.85, 0, 0.01, 0)
+    variavel.Position = UDim2.new(0, 27.5, 0.61, 0)
+    end
+end
+
 local ScrollMaestria = Instance.new("Frame", ScrollFarm)
 ScrollMaestria.Size = UDim2.new(0.9, 0, 0.1, 0)
-ScrollMaestria.Position = UDim2.new(0.05, 0, 0, 550)
+ScrollMaestria.Position = UDim2.new(0.05, 0, 0.55, 0)
 ScrollMaestria.BackgroundColor3 = Color3.fromRGB(0,0,0)
 ScrollMaestria.BackgroundTransparency = 0
 ScrollMaestria.BorderSizePixel = 0
@@ -1065,19 +1112,19 @@ ScrollMaestria.Localize = false
 
 local FrameTextHealth = Instance.new("Frame", ScrollMaestria)
 FrameTextHealth.Size = UDim2.new(0.4, 0, 0.4, 0)
-FrameTextHealth.Position = UDim2.new(0.03, 0, 0, 10)
+FrameTextHealth.Position = UDim2.new(0.03, 0, 0.1, 0)
 FrameTextHealth.BackgroundColor3 = Color3.fromRGB(20,20,20)
 FrameTextHealth.BackgroundTransparency = 0
 FrameTextHealth.BorderSizePixel = 0
 Instance.new("UICorner", FrameTextHealth).CornerRadius = UDim.new(0, 4)
 
 local TextHealth = Instance.new("TextLabel", FrameTextHealth)
-TextHealth.Size = UDim2.new(0, 100, 0, 100)
-TextHealth.Position = UDim2.new(0, -20, 0, -30)
+TextHealth.Size = UDim2.new(0.752, 0, 1, 0)
+TextHealth.Position = UDim2.new(-0.15, 0, 0, 0)
 TextHealth.BackgroundTransparency = 1
 TextHealth.Text = "Health:"
 TextHealth.TextColor3 = Color3.fromRGB(255, 255, 255)
-TextHealth.TextSize = 18
+adjustTextSize(TextHealth, 18)
 TextHealth.Font = Enum.Font.SourceSansBold
 TextHealth.TextYAlignment = Enum.TextYAlignment.Center
 
@@ -1091,8 +1138,6 @@ grad.Color = ColorSequence.new{
     ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 244, 200))}
 
 local backgroundscrolling = Instance.new("Frame", ScrollFarm)
-backgroundscrolling.Size = UDim2.new(0.85, 0, 0, 10)
-backgroundscrolling.Position = UDim2.new(0, 27.5, 0, 610)
 backgroundscrolling.BackgroundColor3 = Color3.new(0.2,0.2,0.2)
 backgroundscrolling.BorderSizePixel = 0
 backgroundscrolling.ClipsDescendants = true
@@ -1106,7 +1151,7 @@ frontscroll.BorderSizePixel = 0
 Instance.new("UICorner", frontscroll).CornerRadius = UDim.new(0, 4)
 
 local buttonScroll = Instance.new("ImageButton", backgroundscrolling)
-buttonScroll.Size = UDim2.new(0, 10, 0, 10)
+adjustScrolling(backgroundscrolling, buttonScroll)
 buttonScroll.Position = UDim2.new(0, 0, 0, 0)
 buttonScroll.BackgroundColor3 = Color3.fromRGB(255,255,255)
 buttonScroll.BorderSizePixel = 0
@@ -1115,13 +1160,13 @@ buttonScroll.AutoButtonColor = false
 Instance.new("UICorner", buttonScroll).CornerRadius = UDim.new(0, 8)
 
 local valuescroll = Instance.new("TextLabel", ScrollFarm)
-valuescroll.Position = UDim2.new(0, 100, 0, 565)
-valuescroll.Size = UDim2.new(0, 40, 0, 31)
+valuescroll.Position = UDim2.new(0.28, 0, 0.564, 0)
+valuescroll.Size = UDim2.new(0.04, 0, 0.031, 0)
 valuescroll.Text = "0%"
 valuescroll.TextColor3 = Color3.fromRGB(255,255,255)
 valuescroll.BackgroundTransparency = 1
 valuescroll.Font = Enum.Font.SourceSansBold
-valuescroll.TextSize = 20
+adjustTextSize(valuescroll, 20)
 
 local grad = Instance.new("UIGradient", valuescroll)
 grad.Color = ColorSequence.new{
@@ -1387,5 +1432,5 @@ pageHeader.Text = "discord.gg/Nfh5Sczyqz"
           Enum.FontWeight.ExtraBold,
           Enum.FontStyle.Normal
           )
-        pageHeader.TextSize = 20
+        adjustTextSize(pageHeader, 20)
         pageHeader.Localize = false
