@@ -906,7 +906,7 @@ contend.BackgroundTransparency = 1
 contend.BorderSizePixel = 0
 
 ------ Scroll Das Tabs
-local function createScrollArea(text, Canvasy)
+local function createScrollArea(text, Canvasy, CanvasyDiscord)
     local ScrollTabs = Instance.new("ScrollingFrame", contend)
     ScrollTabs.Name = text
     ScrollTabs.Size = UDim2.new(0.9, 0, 0.9, 0)
@@ -917,13 +917,13 @@ local function createScrollArea(text, Canvasy)
     ScrollTabs.ZIndex = 1
     Instance.new("UICorner", ScrollTabs).CornerRadius = UDim.new(0, 4)
     ScrollTabs.ScrollBarThickness = 8
-    ScrollTabs.CanvasSize = UDim2.new(0, 0, 0.9, 0)
+    ScrollTabs.CanvasSize = UDim2.new(0, 0, CanvasyDiscord, Canvasy)
     ScrollTabs.Visible = false
     return ScrollTabs
 end
 
 ----- Scroll da Tab Discord
-local ScrollDiscord = createScrollArea("Discord", 265,482)
+local ScrollDiscord = createScrollArea("Discord", 0, 0.9)
 
 -- titulo do menu discord
 local discordTitle = createPageTitle("Discord", 0, ScrollDiscord)
