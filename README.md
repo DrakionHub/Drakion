@@ -354,8 +354,18 @@ end)
 -- botão simples para abrir/fechar a interface principal
 local toggleBtn = Instance.new("ImageButton", gui)
 toggleBtn.Name = "ToggleButton"
-toggleBtn.Size = UDim2.new(0,115,0,110.5)
-toggleBtn.Position = UDim2.new(0,7,0.85,0)
+if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled then
+    -- Mobile
+    toggleBtn.Size = UDim2.new(0, 80, 0, 80)
+    else    -- Pc
+    toggleBtn.Size = UDim2.new(0,115,0,110.5)
+end
+if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled then
+    -- Mobile
+     toggleBtn.Position = UDim2.new(0,7,0.7,0)
+    else    -- Pc
+     toggleBtn.Position = UDim2.new(0,7,0.85,0)
+end
 toggleBtn.Image = "rbxassetid://129327299482883" -- troque pelo ID do seu arquivo (pode ser o mesmo da logo)
 toggleBtn.BackgroundTransparency = 1
 toggleBtn.BorderSizePixel = 0
