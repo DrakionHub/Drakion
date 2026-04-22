@@ -917,7 +917,7 @@ local function createScrollArea(text, Canvasy)
     ScrollTabs.ZIndex = 1
     Instance.new("UICorner", ScrollTabs).CornerRadius = UDim.new(0, 4)
     ScrollTabs.ScrollBarThickness = 8
-    ScrollTabs.CanvasSize = UDim2.new(0, 0, 0, Canvasy)
+    ScrollTabs.CanvasSize = UDim2.new(0, 0, 0.9, 0)
     ScrollTabs.Visible = false
     return ScrollTabs
 end
