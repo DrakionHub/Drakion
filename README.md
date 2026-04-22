@@ -1062,7 +1062,7 @@ if discordBtn then
 end
 
 ----scroll area main farm
-local ScrollFarm = createScrollArea("Main Farm", 1000)
+local ScrollFarm = createScrollArea("Main Farm", 1000, 0)
 
 -- titulo do menu farm
 local MainFarmTitle = createPageTitle("Main Farm", 0, ScrollFarm)
@@ -1259,7 +1259,7 @@ if mainFarmBtn then
 end
 
 ----scroll area Itens Quest
-local ScrollItensQuest = createScrollArea("Itens Quest", 700)
+local ScrollItensQuest = createScrollArea("Itens Quest", 700, 0)
 
 -- titulo do menu Bones
 local itensQuestTitle = createPageTitle("Bones", 0, ScrollItensQuest)
@@ -1302,7 +1302,7 @@ if itensQuestBtn then
 end
 
 ---- scroll area Farm Outher
-local ScrollFarmOuther = createScrollArea("Farm Outher", 1100)
+local ScrollFarmOuther = createScrollArea("Farm Outher", 1100, 0)
 
 -- Titulo do menu First Sea
 local FirstSeaTitle = createPageTitle("First Sea", 0, ScrollFarmOuther)
@@ -1359,7 +1359,7 @@ if FarmOutherBtn then
 end
 
 ---- scroll area Dungeon and Raid
-local ScrollDungeonRaid = createScrollArea("Dungeon and Raid", 1000)
+local ScrollDungeonRaid = createScrollArea("Dungeon and Raid", 1000, 0)
 
 -- Menu Dungeon and Raid
 local dungeonRaidTitle = createPageTitle("Dungeon and Raid", 50, ScrollDungeonRaid)
@@ -1374,7 +1374,7 @@ if dungeonRaidBtn then
 end
 
 ---- scroll area Teleport
-local ScrollTeleport = createScrollArea("Teleport", 1000)
+local ScrollTeleport = createScrollArea("Teleport", 1000, 0)
 
 -- Menu Teleport
 local teleportTitle = createPageTitle("Teleport", 50, ScrollTeleport)
@@ -1388,7 +1388,7 @@ if teleportBtn then
 end
 
 ---- scroll area Fruits
-local ScrollFruits = createScrollArea("Fruits", 1000)
+local ScrollFruits = createScrollArea("Fruits", 1000, 0)
 
 -- Menu Fruits
 local fruitsTitle = createPageTitle("Fruits", 50, ScrollFruits)
@@ -1402,7 +1402,7 @@ if fruitsBtn then
 end
 
 ---- scroll area Shop
-local ScrollShop = createScrollArea("Shop", 1000)
+local ScrollShop = createScrollArea("Shop", 1000, 0)
 
 ----Menu Shop
 local shopTitle = createPageTitle("Shop", 50, ScrollShop)
@@ -1416,7 +1416,7 @@ if shopBtn then
 end
 
 ---- scroll area Setting
-local ScrollSetting = createScrollArea("Setting", 1000)
+local ScrollSetting = createScrollArea("Setting", 1000, 0)
 
 -- Menu Setting
 local settingTitle = createPageTitle("Setting", 50, ScrollSetting)
