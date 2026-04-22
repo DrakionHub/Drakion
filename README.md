@@ -913,7 +913,7 @@ local function createScrollArea(text, Canvasy)
 end
 
 ----- Scroll da Tab Discord
-local ScrollDiscord = createScrollArea("Discord", 0)
+local ScrollDiscord = createScrollArea("Discord", 265,482)
 
 -- titulo do menu discord
 local discordTitle = createPageTitle("Discord", 0, ScrollDiscord)
