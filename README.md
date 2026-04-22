@@ -362,7 +362,7 @@ if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled then
 end
 if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled then
     -- Mobile
-     toggleBtn.Position = UDim2.new(0,7,0.7,0)
+     toggleBtn.Position = UDim2.new(0,7,0.75,0)
     else    -- Pc
      toggleBtn.Position = UDim2.new(0,7,0.85,0)
 end
