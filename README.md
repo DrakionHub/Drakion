@@ -680,7 +680,7 @@ local function showNotification(yt, text)
 end
 
 ------ função dos botões de selecionar
-local function Selectbutton(posicao, textLabel, yoptions, yposition, options)
+local function Selectbutton(posicao, textLabel, yoptions, yposition, Y, options)
     local backgroundselect = Instance.new("Frame", posicao)
     backgroundselect.Size = UDim2.new(0.9, 0, 0, 40)
     backgroundselect.Position = UDim2.new(0.05, 0, yposition, 0)
@@ -778,7 +778,7 @@ local function Selectbutton(posicao, textLabel, yoptions, yposition, options)
 
     local backgroundoptions = Instance.new("ScrollingFrame", posicao)
     backgroundoptions.Size = UDim2.new(0.9, 0, yoptions, 0)
-    backgroundoptions.Position = UDim2.new(0.05, 0, yposition + 0.045, 0)
+    backgroundoptions.Position = UDim2.new(0.05, 0, yposition + Y, 0)
     backgroundoptions.BackgroundColor3 = Color3.fromRGB(0,0,0)
     backgroundoptions.BorderSizePixel = 0
     Instance.new("UICorner", backgroundoptions).CornerRadius = UDim.new(0, 4)
@@ -1083,7 +1083,7 @@ local FarmNearest = createButton("Farm Nearest", 0.245, ScrollFarm)
 local MaterialsTitle = createPageTitle("Materials", 280, ScrollFarm)
 -----menu materiais
 ------select materials
-local SelectMaterials = Selectbutton(ScrollFarm, "Select Material...",  0.13, 0.345, {"Vampire Fang","Fish Tail","Gunpowder","Mystic Droplet","Conjured Cocoa","Dragon Scale","Leather","Ectoplasm","Mini Tusk","Magma Ore","Scrap Metal","Angel Wings","Radioactive Material","Demonic Wisp"})
+local SelectMaterials = Selectbutton(ScrollFarm, "Select Material...",  0.13, 0.345, 0.05, {"Vampire Fang","Fish Tail","Gunpowder","Mystic Droplet","Conjured Cocoa","Dragon Scale","Leather","Ectoplasm","Mini Tusk","Magma Ore","Scrap Metal","Angel Wings","Radioactive Material","Demonic Wisp"})
 
 ----button active Auto Materials
 local AutoMaterials = createButton("Auto Materials", 0.395, ScrollFarm)
@@ -1093,7 +1093,7 @@ local MaestriaTitle = createPageTitle("Maestria", 430, ScrollFarm)
 ---- menu maestria
 
 -----Select Method Maestria
-local MethodMaestria = Selectbutton(ScrollFarm, "Method Maestria...", 0.09, 0.5, {"Sword","Blox Fruit","Gun"})
+local MethodMaestria = Selectbutton(ScrollFarm, "Method Maestria...", 0.09, 0.5, 0.05, {"Sword","Blox Fruit","Gun"})
 
 ----Rolagem de porcentagem de vida para Farm maestria
 
@@ -1241,7 +1241,7 @@ local StatusTitle = createPageTitle("Status", 695, ScrollFarm)
 ----menu status
 
 -----Select Method Status
-local MethodStatus = Selectbutton(ScrollFarm, "Method Status...", 0.15, 0.765, {"Melee","Defense","Sword","Gun","Blox Fruit"})
+local MethodStatus = Selectbutton(ScrollFarm, "Method Status...", 0.15, 0.765, 0.05, {"Melee","Defense","Sword","Gun","Blox Fruit"})
 
 ----Auto Status
 local AutoStatusBtn = createButton("Auto Status", 0.815, ScrollFarm)
@@ -1344,7 +1344,7 @@ local BossesTitle = createPageTitle("Bosses", 704.8, ScrollFarmOuther)
 --- menu Bosses
 local AutoDarkbeard = createButton("Auto Darkbeard", 0.699, ScrollFarmOuther)
 local AutoEliteHunter = createButton("Auto Elite Hunter", 0.739, ScrollFarmOuther)
-local SelectBoss = Selectbutton(ScrollFarmOuther, "Select Boss...", 0.13, 0.779, {"Gorilla King","Chef","The Saw","Yeti","Mob Leader","Vice Admiral","Saber Expert","Warden","Chief Warden","Swan","Magma Admiral","Fishman Lord","Wysper","Thunder God","Cyborg","Diamond","Jeremy","Orbitus","Don Swan","Smoke Admiral","Awakened Ice Admiral","Tide Keeper Boss","Stone","Hydra Leader","Kilo Admiral","Captain Elephant","Beautiful Pirate","Longma","Cake Queen"})
+local SelectBoss = Selectbutton(ScrollFarmOuther, "Select Boss...", 0.13, 0.779, 0.0454, {"Gorilla King","Chef","The Saw","Yeti","Mob Leader","Vice Admiral","Saber Expert","Warden","Chief Warden","Swan","Magma Admiral","Fishman Lord","Wysper","Thunder God","Cyborg","Diamond","Jeremy","Orbitus","Don Swan","Smoke Admiral","Awakened Ice Admiral","Tide Keeper Boss","Stone","Hydra Leader","Kilo Admiral","Captain Elephant","Beautiful Pirate","Longma","Cake Queen"})
 local AtackBossselected = createButton("Atack Boss selected", 0.824, ScrollFarmOuther)
 
 ---Rodapé Farm Outher
@@ -1359,11 +1359,26 @@ if FarmOutherBtn then
 end
 
 ---- scroll area Dungeon and Raid
-local ScrollDungeonRaid = createScrollArea("Dungeon and Raid", 1000, 0)
+local ScrollDungeonRaid = createScrollArea("Dungeon and Raid", 500, 0)
 
--- Menu Dungeon and Raid
-local dungeonRaidTitle = createPageTitle("Dungeon and Raid", 50, ScrollDungeonRaid)
+-- Título do menu Raid
+local RaidTitle = createPageTitle("Raid", 0, ScrollDungeonRaid)
 
+--- menu Raid
+local selectRaid = Selectbutton(ScrollDungeonRaid, "Select Raid...", 0.3, 0.128, 0.1, {"Flame","Ice","Quake","Light","Dark","Spider","Magma","Buddha","Sand","Dough","Phoenix"})
+local AutoRaid = createButton("Auto Raid", 0.228, ScrollDungeonRaid)
+local getfruitRaid = createButton("Get Fruit in Inventory -1M", 0.318, ScrollDungeonRaid)
+local AutoAwakeFruit = createButton("Auto Awake Fruit", 0.408, ScrollDungeonRaid)
+
+---- Título do menu Dungeon
+local DungeonTitle = createPageTitle("Dungeon", 243, ScrollDungeonRaid)
+
+--- menu Dungeon
+local  selectWeaponDungeon = Selectbutton(ScrollDungeonRaid, "Select Weapon Dungeon...", 0.25, 0.614, 0.1, {"Melee","Sword","Gun","Blox Fruit"})
+local  AutoAtackDungeon = createButton("Auto Attack Dungeon", 0.704, ScrollDungeonRaid)
+
+---- Rodapé Dungeon and Raid
+local RodapeDungeonRaid = createFooter(0.925, 0.002, ScrollDungeonRaid)
 -- register page
 pages["DungeonRaid"] = ScrollDungeonRaid
 
@@ -1373,11 +1388,311 @@ if dungeonRaidBtn then
     end)
 end
 
----- scroll area Teleport
-local ScrollTeleport = createScrollArea("Teleport", 1000, 0)
+----- scroll area Teleport
+local ScrollTeleport = createScrollArea("Teleport", 850, 0)
 
--- Menu Teleport
-local teleportTitle = createPageTitle("Teleport", 50, ScrollTeleport)
+---- Título do Menu Teleport
+local teleportTitle = createPageTitle("Teleport", 0, ScrollTeleport)
+
+--- menu Teleport
+local teleportIsland = Selectbutton(ScrollTeleport, "Select Island...", 0.1, 0.0752, 0.1, {"Pirate Starter Island", "Marine Starter Island", "Jungle", "Pirate Village", "Desert", "Frozen Village", "Marine Fortress", "Skylands", "Prison", "Colosseum", "Magma Village", "Underwater City", "Upper Skylands", "Fountain City", "Middle Town", "Jean-Luc Island"})
+local AutoTravelSland = createButton("Auto Travel to Island", 0.127, ScrollTeleport)
+
+---- Título do menu Esp
+local EspTitle = createPageTitle("Esp", 150.5, ScrollTeleport)
+
+--- menu Esp
+local espBerry = createButton("Esp Berry", 0.2523, ScrollTeleport)
+local espIsland = createButton("Esp Island", 0.305, ScrollTeleport)
+local espFruit = createButton("Esp Fruit", 0.358, ScrollTeleport)
+local espPlayer = createButton("Esp Player", 0.411, ScrollTeleport)
+
+---- Título do menu speed and jump
+local SpeedJumpTitle = createPageTitle("Speed and Jump", 390, ScrollTeleport)
+
+--- menu speed and jump
+-- Rolagem de porcentagem de speed
+local adjustSpeed = function(variavel, variavel2)
+    if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled then
+    ---- mobile
+    variavel2.Size = UDim2.new(0.0318/3 * 4, 0, 1, 0)
+    variavel.Size = UDim2.new(0.85, 0, 0.013, 0)
+    variavel.Position = UDim2.new(0, 27.5/4 * 3, 0.625, 0)
+    else
+    ---- pc
+    variavel2.Size = UDim2.new(0.0318, 0, 1, 0)
+    variavel.Size = UDim2.new(0.85, 0, 0.013, 0)
+    variavel.Position = UDim2.new(0, 27.5, 0.625, 0)
+    end
+end
+
+local ScrollSpeed = Instance.new("Frame", ScrollTeleport)
+ScrollSpeed.Size = UDim2.new(0.9, 0, 0.1333, 0)
+ScrollSpeed.Position = UDim2.new(0.05, 0, 0.534, 0)
+ScrollSpeed.BackgroundColor3 = Color3.fromRGB(0,0,0)
+ScrollSpeed.BackgroundTransparency = 0
+ScrollSpeed.BorderSizePixel = 0
+Instance.new("UICorner", ScrollSpeed).CornerRadius = UDim.new(0, 4)
+ScrollSpeed.Localize = false
+
+local FrameTextSpeed = Instance.new("Frame", ScrollSpeed)
+FrameTextSpeed.Size = UDim2.new(0.4, 0, 0.4, 0)
+FrameTextSpeed.Position = UDim2.new(0.03, 0, 0.1, 0)
+FrameTextSpeed.BackgroundColor3 = Color3.fromRGB(20,20,20)
+FrameTextSpeed.BackgroundTransparency = 0
+FrameTextSpeed.BorderSizePixel = 0
+Instance.new("UICorner", FrameTextSpeed).CornerRadius = UDim.new(0, 4)
+
+local TextSpeed = Instance.new("TextLabel", FrameTextSpeed)
+TextSpeed.Size = UDim2.new(0.752, 0, 1, 0)
+TextSpeed.Position = UDim2.new(-0.15, 0, 0, 0)
+TextSpeed.BackgroundTransparency = 1
+TextSpeed.Text = "Speed:"
+TextSpeed.TextColor3 = Color3.fromRGB(255, 255, 255)
+adjustTextSize(TextSpeed, 18)
+TextSpeed.Font = Enum.Font.SourceSansBold
+TextSpeed.TextYAlignment = Enum.TextYAlignment.Center
+
+local grad = Instance.new("UIGradient", TextSpeed)
+grad.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 244, 200)),
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 218, 27)),
+    ColorSequenceKeypoint.new(0.05, Color3.fromRGB(160, 120, 30)),
+    ColorSequenceKeypoint.new(0.2, Color3.fromRGB(160, 120, 30)),
+    ColorSequenceKeypoint.new(0.9, Color3.fromRGB(255, 218, 27)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 244, 200))}
+
+local backgroundscrollingSpeed = Instance.new("Frame", ScrollTeleport)
+backgroundscrollingSpeed.BackgroundColor3 = Color3.new(0.2,0.2,0.2)
+backgroundscrollingSpeed.BorderSizePixel = 0
+backgroundscrollingSpeed.ClipsDescendants = true
+backgroundscrollingSpeed.Active = true
+Instance.new("UICorner", backgroundscrollingSpeed).CornerRadius = UDim.new(0, 4)
+
+local frontscrollSpeed = Instance.new("Frame", backgroundscrollingSpeed)
+frontscrollSpeed.Size = UDim2.new(0, 0, 1, 0)
+frontscrollSpeed.BackgroundColor3 = Color3.fromRGB(212,12,12)
+frontscrollSpeed.BorderSizePixel = 0
+Instance.new("UICorner", frontscrollSpeed).CornerRadius = UDim.new(0, 4)
+
+local buttonScrollSpeed = Instance.new("ImageButton", backgroundscrollingSpeed)
+adjustSpeed(backgroundscrollingSpeed, buttonScrollSpeed)
+buttonScrollSpeed.Position = UDim2.new(0, 0, 0, 0)
+buttonScrollSpeed.BackgroundColor3 = Color3.fromRGB(255,255,255)
+buttonScrollSpeed.BorderSizePixel = 0
+buttonScrollSpeed.ZIndex = 2
+buttonScrollSpeed.AutoButtonColor = false
+Instance.new("UICorner", buttonScrollSpeed).CornerRadius = UDim.new(0, 8)
+
+local valuescrollSpeed = Instance.new("TextLabel", ScrollSpeed)
+valuescrollSpeed.Position = UDim2.new(0.28, 0, 0.28, 0)
+valuescrollSpeed.Size = UDim2.new(0.04, 0, 0.031, 0)
+valuescrollSpeed.Text = "0%"
+valuescrollSpeed.TextColor3 = Color3.fromRGB(255,255,255)
+valuescrollSpeed.BackgroundTransparency = 1
+valuescrollSpeed.Font = Enum.Font.SourceSansBold
+adjustTextSize(valuescrollSpeed, 20)
+
+local grad = Instance.new("UIGradient", valuescrollSpeed)
+grad.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 218, 27)),
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 218, 27)),
+    ColorSequenceKeypoint.new(0.05, Color3.fromRGB(160, 120, 30)),
+    ColorSequenceKeypoint.new(0.2, Color3.fromRGB(160, 120, 30)),
+    ColorSequenceKeypoint.new(0.9, Color3.fromRGB(255, 218, 27)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 218, 27))}
+
+local minValue, maxValue = 0, 1036
+local dragging = false
+
+local function setSliderFromX(px)
+    local left = backgroundscrollingSpeed.AbsolutePosition.X
+    local width = backgroundscrollingSpeed.AbsoluteSize.X
+    local ratio = math.clamp((px - left) / width, 0, 0.965)
+    frontscrollSpeed.Size = UDim2.new(ratio + 0.01, 0, 1, 0)
+    buttonScrollSpeed.Position = UDim2.new(ratio, 0, 0, 0)
+    local value = math.floor(minValue + ratio * (maxValue - minValue) + 0.5)
+    valuescrollSpeed.Text = tostring(value / 10) .. "%"
+    return value
+end
+
+buttonScrollSpeed.InputBegan:Connect(function(input)
+    if isPress(input) then
+        dragging = true
+    end
+end)
+
+buttonScrollSpeed.InputEnded:Connect(function(input)
+    if isPress(input) then
+        dragging = false
+    end
+end)
+
+backgroundscrollingSpeed.InputBegan:Connect(function(input)
+    if isPress(input) then
+        dragging = true
+        setSliderFromX(input.Position.X)
+    end
+end)
+
+backgroundscrollingSpeed.InputEnded:Connect(function(input)
+    if isPress(input) then
+        dragging = false
+    end
+end)
+
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+    if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement
+        or input.UserInputType == Enum.UserInputType.Touch) then
+        setSliderFromX(input.Position.X)
+    end
+end)
+
+---change walkspeed
+local changeWalkSpeed = createButton("Change WalkSpeed", 0.673, ScrollTeleport)
+
+-- Rolagem de porcentagem do jump
+local adjustJump = function(variavel, variavel2)
+    if UserInputService.TouchEnabled and not UserInputService.KeyboardEnabled then
+    ---- mobile
+    variavel2.Size = UDim2.new(0.0318/3 * 4, 0, 1, 0)
+    variavel.Size = UDim2.new(0.85, 0, 0.013, 0)
+    variavel.Position = UDim2.new(0, 27.5/4 * 3, 0.815, 0)
+    else
+    ---- pc
+    variavel2.Size = UDim2.new(0.0318, 0, 1, 0)
+    variavel.Size = UDim2.new(0.85, 0, 0.013, 0)
+    variavel.Position = UDim2.new(0, 27.5, 0.815, 0)
+    end
+end
+
+local ScrollJump = Instance.new("Frame", ScrollTeleport)
+ScrollJump.Size = UDim2.new(0.9, 0, 0.1333, 0)
+ScrollJump.Position = UDim2.new(0.05, 0, 0.725, 0)
+ScrollJump.BackgroundColor3 = Color3.fromRGB(0,0,0)
+ScrollJump.BackgroundTransparency = 0
+ScrollJump.BorderSizePixel = 0
+Instance.new("UICorner", ScrollJump).CornerRadius = UDim.new(0, 4)
+ScrollJump.Localize = false
+
+local FrameTextJump = Instance.new("Frame", ScrollJump)
+FrameTextJump.Size = UDim2.new(0.4, 0, 0.4, 0)
+FrameTextJump.Position = UDim2.new(0.03, 0, 0.1, 0)
+FrameTextJump.BackgroundColor3 = Color3.fromRGB(20,20,20)
+FrameTextJump.BackgroundTransparency = 0
+FrameTextJump.BorderSizePixel = 0
+Instance.new("UICorner", FrameTextJump).CornerRadius = UDim.new(0, 4)
+
+local TextJump = Instance.new("TextLabel", FrameTextJump)
+TextJump.Size = UDim2.new(0.752, 0, 1, 0)
+TextJump.Position = UDim2.new(-0.15, 0, 0, 0)
+TextJump.BackgroundTransparency = 1
+TextJump.Text = "Jump:"
+TextJump.TextColor3 = Color3.fromRGB(255, 255, 255)
+adjustTextSize(TextJump, 18)
+TextJump.Font = Enum.Font.SourceSansBold
+TextJump.TextYAlignment = Enum.TextYAlignment.Center
+
+local grad = Instance.new("UIGradient", TextJump)
+grad.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 244, 200)),
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 218, 27)),
+    ColorSequenceKeypoint.new(0.05, Color3.fromRGB(160, 120, 30)),
+    ColorSequenceKeypoint.new(0.2, Color3.fromRGB(160, 120, 30)),
+    ColorSequenceKeypoint.new(0.9, Color3.fromRGB(255, 218, 27)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 244, 200))}
+
+local backgroundscrollingJump = Instance.new("Frame", ScrollTeleport)
+backgroundscrollingJump.BackgroundColor3 = Color3.new(0.2,0.2,0.2)
+backgroundscrollingJump.BorderSizePixel = 0
+backgroundscrollingJump.ClipsDescendants = true
+backgroundscrollingJump.Active = true
+Instance.new("UICorner", backgroundscrollingJump).CornerRadius = UDim.new(0, 4)
+
+local frontscrollJump = Instance.new("Frame", backgroundscrollingJump)
+frontscrollJump.Size = UDim2.new(0, 0, 1, 0)
+frontscrollJump.BackgroundColor3 = Color3.fromRGB(212,12,12)
+frontscrollJump.BorderSizePixel = 0
+Instance.new("UICorner", frontscrollJump).CornerRadius = UDim.new(0, 4)
+
+local buttonScrollJump = Instance.new("ImageButton", backgroundscrollingJump)
+adjustJump(backgroundscrollingJump, buttonScrollJump)
+buttonScrollJump.Position = UDim2.new(0, 0, 0, 0)
+buttonScrollJump.BackgroundColor3 = Color3.fromRGB(255,255,255)
+buttonScrollJump.BorderSizePixel = 0
+buttonScrollJump.ZIndex = 2
+buttonScrollJump.AutoButtonColor = false
+Instance.new("UICorner", buttonScrollJump).CornerRadius = UDim.new(0, 8)
+
+local valuescrollJump = Instance.new("TextLabel", ScrollJump)
+valuescrollJump.Position = UDim2.new(0.28, 0, 0.28, 0)
+valuescrollJump.Size = UDim2.new(0.04, 0, 0.031, 0)
+valuescrollJump.Text = "0%"
+valuescrollJump.TextColor3 = Color3.fromRGB(255,255,255)
+valuescrollJump.BackgroundTransparency = 1
+valuescrollJump.Font = Enum.Font.SourceSansBold
+adjustTextSize(valuescrollJump, 20)
+
+local grad = Instance.new("UIGradient", valuescrollJump)
+grad.Color = ColorSequence.new{
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 218, 27)),
+    ColorSequenceKeypoint.new(0, Color3.fromRGB(255, 218, 27)),
+    ColorSequenceKeypoint.new(0.05, Color3.fromRGB(160, 120, 30)),
+    ColorSequenceKeypoint.new(0.2, Color3.fromRGB(160, 120, 30)),
+    ColorSequenceKeypoint.new(0.9, Color3.fromRGB(255, 218, 27)),
+    ColorSequenceKeypoint.new(1, Color3.fromRGB(255, 218, 27))}
+
+local minValue, maxValue = 0, 1036
+local dragging = false
+
+local function setSliderFromX(px)
+    local left = backgroundscrollingJump.AbsolutePosition.X
+    local width = backgroundscrollingJump.AbsoluteSize.X
+    local ratio = math.clamp((px - left) / width, 0, 0.965)
+    frontscrollJump.Size = UDim2.new(ratio + 0.01, 0, 1, 0)
+    buttonScrollJump.Position = UDim2.new(ratio, 0, 0, 0)
+    local value = math.floor(minValue + ratio * (maxValue - minValue) + 0.5)
+    valuescrollJump.Text = tostring(value / 10) .. "%"
+    return value
+end
+
+buttonScrollJump.InputBegan:Connect(function(input)
+    if isPress(input) then
+        dragging = true
+    end
+end)
+
+buttonScrollJump.InputEnded:Connect(function(input)
+    if isPress(input) then
+        dragging = false
+    end
+end)
+
+backgroundscrollingJump.InputBegan:Connect(function(input)
+    if isPress(input) then
+        dragging = true
+        setSliderFromX(input.Position.X)
+    end
+end)
+
+backgroundscrollingJump.InputEnded:Connect(function(input)
+    if isPress(input) then
+        dragging = false
+    end
+end)
+
+game:GetService("UserInputService").InputChanged:Connect(function(input)
+    if dragging and (input.UserInputType == Enum.UserInputType.MouseMovement
+        or input.UserInputType == Enum.UserInputType.Touch) then
+        setSliderFromX(input.Position.X)
+    end
+end)
+
+---- change jump power
+local changeJumpPower = createButton("Change JumpPower", 0.863, ScrollTeleport)
+
+---- Rodapé Teleport
+local RodapeTeleport = createFooter(0.95, 0.003636, ScrollTeleport)
 
 -- register page
 pages["Teleport"] = ScrollTeleport
