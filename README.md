@@ -1703,10 +1703,27 @@ if teleportBtn then
 end
 
 ---- scroll area Fruits
-local ScrollFruits = createScrollArea("Fruits", 1000, 0)
+local ScrollFruits = createScrollArea("Fruits", 570, 0)
 
--- Menu Fruits
-local fruitsTitle = createPageTitle("Fruits", 50, ScrollFruits)
+-- Título do Menu Fruits
+local fruitsTitle = createPageTitle("Fruits", 0, ScrollFruits)
+
+----Menu Fruits
+local RandomFruits = createButton("Random Fruits", 0.110, ScrollFruits)
+local autoStoreFruit = createButton("Auto Store Fruit", 0.190, ScrollFruits)
+local autoCollectFruit = createButton("Auto Collect Fruit", 0.27, ScrollFruits)
+
+---- Título do menu Stocks
+local StocksTitle = createPageTitle("Stocks", 193.5, ScrollFruits)
+
+--- menu Stocks
+local selectfruitsstock = Selectbutton(ScrollFruits, "Select Fruit Stock...", 0.3, 0.450, 0.09, {"Rocket","Spin","Blade","Spring","Bomb","Smoke","Spike","Flame","Ice","Sand","Dark","Eagle","Diamond","Light","Rubber","Ghost","Magma","Quake","Buddha","Love","Creation","Spider","Sound","Phoenix","Portal","Lightning","Pain","Blizzard","Gravity","Mammoth","T-Rex","Dough","Shadow","Venom","Gas","Spirit","Tiger","Yeti","Kitsune","Control","Dragon West","Dragon East"})
+local selectMirageFruitStock = Selectbutton(ScrollFruits, "Select Mirage Fruit Stock...", 0.3, 0.54, 0.09, {"Rocket","Spin","Blade","Spring","Bomb","Smoke","Spike","Flame","Ice","Sand","Dark","Eagle","Diamond","Light","Rubber","Ghost","Magma","Quake","Buddha","Love","Creation","Spider","Sound","Phoenix","Portal","Lightning","Pain","Blizzard","Gravity","Mammoth","T-Rex","Dough","Shadow","Venom","Gas","Spirit","Tiger","Yeti","Kitsune","Control","Dragon West","Dragon East"})
+local BuyBasicStock = createButton("Buy Basic Stock", 0.634, ScrollFruits)
+local buyMirageStock = createButton("Buy Mirage Stock (Mirage Spawn)", 0.713, ScrollFruits)
+
+----Rodapé Fruits
+local RodapeFruits = createFooter(0.93, 0.00526, ScrollFruits)
 
 -- register page
 pages["Fruits"] = ScrollFruits
