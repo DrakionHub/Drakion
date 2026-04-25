@@ -604,7 +604,7 @@ local function createButton(text, y, posicao)
     ButtonOfTheBotao.Name = text.."Button"
     adjustSize(ButtonOfTheBotao, 0.4, 0.9)
     ButtonOfTheBotao.BackgroundTransparency = 0
-    ButtonOfTheBotao.BackgroundColor3 = Color3.fromRGB(212,12,12)
+    ButtonOfTheBotao.BackgroundColor3 = Color3.fromRGB(0,0,0)
     ButtonOfTheBotao.ImageTransparency = 1
     ButtonOfTheBotao.BorderSizePixel = 0
     Instance.new("UICorner", ButtonOfTheBotao).CornerRadius = UDim.new(0, 2)
@@ -624,6 +624,24 @@ local function createButton(text, y, posicao)
     local innerStroke = Instance.new("UIStroke", inner)
     innerStroke.Color = Color3.fromRGB(212,12,12)
     innerStroke.Thickness = 2
+
+    local ligado = false
+
+    ButtonOfTheBotao.MouseButton1Click:Connect(function()
+
+      ligado = not ligado
+
+     if ligado then
+         -- ligado = vermelho
+            ButtonOfTheBotao.BackgroundColor3 = Color3.fromRGB(212,12,12)
+            innerStroke.Color = Color3.fromRGB(212,12,12)
+
+        else
+            -- desligado = preto
+            ButtonOfTheBotao.BackgroundColor3 = Color3.fromRGB(0,0,0)
+            innerStroke.Color = Color3.fromRGB(0,0,0)
+        end
+    end)
     return Botaoprincipal
 end
 
